@@ -39,6 +39,19 @@ A dynamic firewall hooking into the IPv4 network stack.
     * Inspects raw socket buffers (`sk_buff`) and IP headers.
     * **Dynamic Filtering:** Queries `the_void` module to check if an incoming packet source is banned.
     * Drops packets silently before they reach the OS firewall.
+    
+    
+### 5\. The Thief (`mouse_thief.c`)
+
+**Subsystem:** USB Core & Input Subsystem
+A USB device driver that claims ownership of a specific hardware device, bypassing the default OS driver.
+
+  * **Capabilities:**
+      * **Device Hijacking:** Registers a `usb_driver` with specific Vendor/Product IDs to detach the default `usbhid` driver.
+      * **Direct Hardware Access:** Allocates DMA-capable memory and submits URBs (USB Request Blocks) to read raw interrupt data.
+      * **Protocol Reverse Engineering:** Decodes non-standard byte streams from wireless receivers.
+      * **Input Injection:** Maps raw signals to the Kernel Input Subsystem to control the cursor programmatically.
+
 
 ---
 
@@ -98,6 +111,15 @@ ping 127.0.0.1
 ps aux | grep sleep
 # Send it to the Reaper
 echo "12345" > /dev/reaper
+```
+
+**Hijacking a Mouse (The Thief):**
+
+```bash
+# Load the driver (Your specific mouse ID must be compiled in)
+sudo insmod mouse_thief.ko
+# Watch the kernel logs to see raw data streaming from the hardware
+sudo dmesg -w
 ```
 
 -----
