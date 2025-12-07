@@ -1,0 +1,13 @@
+CompileFlags:
+  # these flags come from GCC builds of the kernel but confuse clangd
+  Remove:
+    - -mindirect-branch-register
+    - -mpreferred-stack-boundary*
+    - -mrecord-mcount
+    - -fconserve-stack
+    - -fno-allow-store-data-races
+    - -fzero-init-padding-bits=all
+    - -mindirect-branch=thunk-extern
+    - -fmin-function-alignment*
+    - -fsanitize=bounds-strict
+    - -bugprone-sizeof-expression
